@@ -1,3 +1,5 @@
+//This code is implemented by Mariam Ahmad Amin .For copyrights:i used a binary search function from my colleauge Fatma Muhammad abdel FATTAH
+
 #include <iostream>
 #include <vector>
 
