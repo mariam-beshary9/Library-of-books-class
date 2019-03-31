@@ -4,16 +4,12 @@
 using namespace std;
 
 
-class Book
+struct Book
 {
-    private :
+
         string name ;
         string author ;
         int year ;
-
-
-
-    public :
         int versions ;
         Book ()
         {
@@ -84,30 +80,8 @@ class Book
 
         return in ;
     }
-    int SearchByName (vector <Book> v ,string key)
-    {   for (int i=0 ; i<v.size();i++)
-        {
-         if ( v[i].name==key)
-        {
 
-            return i ;
-        }}
-          return -1 ;
-    }
-    int SearchByAuthor (vector <Book> v ,string key)
-    {   for (int i=0 ; i<v.size();i++)
-        {
-             if ( v[i].author==key)
-             {
-
-                  return i ;
-
-             }
-
-        }
-        return -1 ;
-    }
-    void sortingByName (vector <Book> v)
+     void sortingByName (vector <Book> v)
     {   Book mini = v[0]  ;
         int miniIndex;
         for (int i=0 ; i<v.size()-1;i++)
@@ -124,6 +98,95 @@ class Book
            swap (v[i],v[miniIndex]);
         }
     }
+    void sortingByAuthor (vector <Book> v)
+    {   Book mini = v[0]  ;
+        int miniIndex;
+        for (int i=0 ; i<v.size()-1;i++)
+        {   mini = v[i] ;
+           for (int j=i+1 ; j<v.size();j++)
+           {
+                if (v[i].author >v[j].author)
+                {
+                    mini= v[j] ;
+                    miniIndex = j ;
+
+                }
+           }
+           swap (v[i],v[miniIndex]);
+        }
+    }
+
+    int SearchByName (vector <Book> v ,string key)
+    {
+         sortingByName(v) ;
+
+            int start = 0;
+            int endd = v.size();
+
+
+            while (start<=endd){
+
+            int mid=start + (endd-start)/2;
+
+            if (key == v[mid].name)
+            {
+                return mid;
+            }
+            else if(key < v[mid].name)
+            {
+                endd = mid-1;
+            }
+            else
+                start = mid+1;
+            }
+                return -1;
+
+      /*   for (int i=0 ; i<v.size();i++)
+        {
+         if ( v[i].name==key)
+        {
+
+            return i ;
+        }}
+          return -1 ;*/
+    }
+    int SearchByAuthor (vector <Book> v ,string key)
+    {
+            sortingByAuthor(v) ;
+
+            int start = 0;
+            int endd = v.size();
+
+
+            while (start<=endd){
+
+            int mid=start + (endd-start)/2;
+
+            if (key == v[mid].author)
+            {
+                return mid;
+            }
+            else if(key < v[mid].author)
+            {
+                endd = mid-1;
+            }
+            else
+                start = mid+1;
+            }
+                return -1;
+         /* for (int i=0 ; i<v.size();i++)
+        {
+             if ( v[i].author==key)
+             {
+
+                  return i ;
+
+             }
+
+        }
+        return -1 ;*/
+    }
+
     void sortingByVersions (vector <Book> v)
     {   Book mini = v[0]  ;
         int miniIndex;
